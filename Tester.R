@@ -65,6 +65,13 @@ B = solve(t(x)%*%x)%*%t(x)%*%y
 model=lm(dist~speed,data = cars)
 summary(model)
 
+model=lm(dist~speed,data = cars)
+model$coefficients=
+  ifelse(calculated_model_outputs$Coeficients==model$coefficients,'Equal Coeficients','Not Equal Coeficients')
+summary(model)
+identical(as.numeric(calculated_model_outputs$Coeficients),as.numeric(model$coefficients))
+as.numeric(model$coefficients)
+
 #q3 modified
 
 y <- cars[,2]

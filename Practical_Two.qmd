@@ -11,21 +11,37 @@ x <- seq(1,100)
 err <- rnorm(100, mean = 0, sd = 0.2)
 y <- sin(x/10)+err 
 f <- 0.5
-#create function
-customLowess <- function(x, y, f){
-  k <- f*length(x)
-  return('Smoothed Values'=)
-}
 ```
 
 Calculate Lowess Values
 
 ```{r}
-
+customLowess <- function(x, y, f){
+  k <- f*length(x)
+  yi <- c()
+  for (i in 1:length(x)){
+    w <- c()
+    B <- c()
+    closest_indices <- order(abs(x - x[i]))[1:k+1]
+    closest_indices <- sort(closest_indices)
+    dmax <- max(abs(closest_indices-x[i])) 
+    for (j in closest_indices){
+      wj = integer()
+      wj = (1-(abs(x[j]-x[i])/dmax)^3)^3  
+      w=c(w,wj)
+      
+    }}
+    closest_indices = cbind(1,closest_indices)
+    b = solve(t(closest_indices)%*%w%*%closest_indices)%*%t(closest_indices)%*%w%*%y
+    yi = c(yi,b[1]+b[2]*xi)
+   
+  
+  return('Smoothed Values'=yi)
+  }
 ```
 
 Compare Lowess values to function
 
 ```{r}
-
+customLowess(x,y,f)
 ```

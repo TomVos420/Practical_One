@@ -7,7 +7,7 @@ err <- rnorm(100, mean = 0, sd = 0.2)
 y <- sin(x/10)+err 
 f <- 0.5
 #create function
-#customLowess <- function(x, y, f){
+customLowess <- function(x, y, f){
   k <- f*length(x)
   yi <- c()
   for (i in 1:length(x)){
@@ -64,7 +64,6 @@ dist
 #4
 tbl = nycflights13::flights
 dist_tbl <- tbl  |> group_by(carrier,month) |> summarise(mean_delay = mean(dep_delay,na.rm = TRUE))
-
 dist_tbl |> pivot_wider(names_from =carrier ,values_from = mean_delay)
 #5
 tbl = nycflights13::flights
@@ -84,5 +83,5 @@ DuplicateRoutes <- Routes|> filter(duplicated(Route)) |> select(Route) |> distin
 #For each such route, calculate the average arrival delay for each airline (exclude NAs). Find the names of these airlines
 
 Avg_delay_routes <- flights|> group_by(origin,dest,carrier) |>  summarise(mean_delay = mean(dep_delay,na.rm = TRUE)) 
-Avg_delay_routes |> filter(duplicated(Route)) |> select(Route) |> distinct()
+Avg_delay_routes |> filter(duplicated(select(origin,dest,carrier),fromLast = TRUE))  |> distinct()
 
