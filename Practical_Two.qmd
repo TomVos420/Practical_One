@@ -17,3 +17,15 @@ customLowess <- function(x, y, f){
   return('Smoothed Values'=)
 }
 ```
+
+Calculate Lowess Values
+
+```{r}
+
+```
+
+Compare Lowess values to function
+
+```{r}
+
+```

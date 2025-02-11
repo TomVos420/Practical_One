@@ -37,14 +37,21 @@ max(ozone)
 Question 3
 
 ```{r}
-function(x,y){
-  x = cbind(1,x)
-  Beta = solve(t(x)%*%x)%*%t(x)%*%y  
-}
+
 y <- cars[,2]
 x <- cars[,1]
-
-B
+df <- 48
+func = function(x,y,df){
+  x = cbind(1,x)
+  Beta = solve(t(x)%*%x)%*%t(x)%*%y 
+  residuals = y - x%*%Beta
+  residual_var = sum(residuals^2) / df
+  std_err = sqrt(diag(residual_var*(solve(t(x)%*%x)))) 
+  t_val = Beta/std_err
+  p_values = 2 * pt(-abs(t_val), df)
+  return(list('Coeficients' = Beta, 'StdEror' = std_err, 'P-val' = p_values))
+}
+func(x,y,df)
 
 ```
 

@@ -4,3 +4,72 @@ format: html
 ---
 
 ## Generate Data
+
+```{r}
+# Install tidyverse if not already installed
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+  install.packages("tidyverse")
+}
+library(tidyverse)
+
+# Install and load nycflights13 for flight data
+if (!requireNamespace("nycflights13", quietly = TRUE)) {
+  install.packages("nycflights13")
+}
+library(nycflights13)
+```
+
+## Question 1
+
+```{r}
+dplyr::data_frame(nycflights13::flights)
+```
+
+Question 2
+
+```{r}
+
+tbl = nycflights13::flights 
+flight1 <- tbl |> dplyr::filter(tbl$month==1) 
+dist_tbl <- flight1  |> group_by(carrier) |> summarise(mean_dist = mean(distance,na.rm = TRUE),sd_dist = sd(distance,na.rm = TRUE))
+dist_tbl |> arrange(mean_dist,sd_dist)
+```
+
+Question 3
+
+```{r}
+
+```
+
+dkhsdfhs
+
+Question 4
+
+```{r}
+tbl = nycflights13::flights
+dist_tbl <- tbl  |> group_by(carrier,month) |> summarise(mean_delay = mean(dep_delay,na.rm = TRUE))
+dist_tbl |> pivot_wider(names_from =carrier ,values_from = mean_delay)
+```
+
+Question 5
+
+```{r}
+tbl = nycflights13::flights
+numerator <- tbl |> filter(dep_delay>0 & arr_delay<=0) |> tally()
+denominator <- tally(tbl)
+numerator/denominator
+```
+
+Question 6
+
+```{r}
+Routes <- flights|> unite(Route,origin, dest, sep = " to ") |> select(Route,carrier) |>distinct()
+DuplicateRoutes <- Routes|> filter(duplicated(Route)) |> select(Route) |> distinct()
+```
+
+Gets the average delay
+
+```{r}
+Avg_delay_routes <- flights|> group_by(origin,dest,carrier) |>  summarise(mean_delay = mean(dep_delay,na.rm = TRUE)) 
+
+```
