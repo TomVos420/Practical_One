@@ -1,0 +1,19 @@
+---
+title: "Practical_Two"
+format: html
+---
+
+## Generate Data
+
+```{r}
+set.seed(1)
+x <- seq(1,100)
+err <- rnorm(100, mean = 0, sd = 0.2)
+y <- sin(x/10)+err 
+f <- 0.5
+#create function
+customLowess <- function(x, y, f){
+  k <- f*length(x)
+  return('Smoothed Values'=)
+}
+```
