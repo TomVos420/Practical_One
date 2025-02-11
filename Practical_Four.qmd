@@ -25,7 +25,7 @@ library(nycflights13)
 dplyr::data_frame(nycflights13::flights)
 ```
 
-Question 2
+## Question 2
 
 ```{r}
 
@@ -35,7 +35,7 @@ dist_tbl <- flight1  |> group_by(carrier) |> summarise(mean_dist = mean(distance
 dist_tbl |> arrange(mean_dist,sd_dist)
 ```
 
-Question 3
+## Question 3
 
 ```{r}
 
@@ -43,7 +43,7 @@ Question 3
 
 dkhsdfhs
 
-Question 4
+## Question 4
 
 ```{r}
 tbl = nycflights13::flights
@@ -51,7 +51,7 @@ dist_tbl <- tbl  |> group_by(carrier,month) |> summarise(mean_delay = mean(dep_d
 dist_tbl |> pivot_wider(names_from =carrier ,values_from = mean_delay)
 ```
 
-Question 5
+## Question 5
 
 ```{r}
 tbl = nycflights13::flights
@@ -60,7 +60,7 @@ denominator <- tally(tbl)
 numerator/denominator
 ```
 
-Question 6
+## Question 6
 
 ```{r}
 Routes <- flights|> unite(Route,origin, dest, sep = " to ") |> select(Route,carrier) |>distinct()

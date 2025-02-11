@@ -2,14 +2,14 @@
 title: "Practical_One"
 ---
 
-Question 1
+## Question 1
 
 ```{r}
 incomplete <- airquality[apply(airquality,1, function(row) any(is.na(row))), ]
 print(incomplete)
 ```
 
-Question 2
+## Question 2
 
 ```{r}
 
@@ -34,7 +34,7 @@ min(ozone)
 max(ozone)
 ```
 
-Question 3
+## Question 3
 
 ```{r}
 
@@ -51,17 +51,24 @@ func = function(x,y,df){
   p_values = 2 * pt(-abs(t_val), df)
   return(list('Coeficients' = Beta, 'StdEror' = std_err, 'P-val' = p_values))
 }
-func(x,y,df)
-
+calculated_model_outputs=func(x,y,df)
+calculated_model_outputs
 ```
 
-Question 4
+## Question 4
 
 ```{r}
 model=lm(dist~speed,data = cars)
-model$coefficients
 
-summary(model)
+'Coeficients'
+as.numeric(calculated_model_outputs$Coeficients)
+as.numeric(model$coefficients)
 
+'Std Error'
+as.numeric(calculated_model_outputs$StdEror)
+as.numeric(summary(model)$coefficients[, "Std. Error"])
 
+'P-Values'
+as.numeric(calculated_model_outputs$`P-val`)
+as.numeric(summary(model)$coefficients[, "Pr(>|t|)"])
 ```
